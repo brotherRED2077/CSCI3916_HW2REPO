@@ -39,11 +39,41 @@ router.route('/post')
             if (req.get('Content-Type')) {
                 console.log("Content-Type: " + req.get('Content-Type'));
                 res = res.type(req.get('Content-Type'));
-            }
-            var o = getJSONObject(req);
+            }            var o = getJSONObject(req);
+            res.json(o);
+        }
+    )
+    .get(authController.isAuthenticated, function (req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                console.log("Content-Type: " + req.get('Content-Type'));
+                res = res.type(req.get('Content-Type'));
+            }            var o = getJSONObject(req);
+            res.json(o);
+        }
+    )
+    .put(authController.isAuthenticated, function (req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                console.log("Content-Type: " + req.get('Content-Type'));
+                res = res.type(req.get('Content-Type'));
+            }            var o = getJSONObject(req);
+            res.json(o);
+        }
+    )
+    .delete(authController.isAuthenticated, function (req, res) {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                console.log("Content-Type: " + req.get('Content-Type'));
+                res = res.type(req.get('Content-Type'));
+            }            var o = getJSONObject(req);
             res.json(o);
         }
     );
+
 
 router.route('/postjwt')
     .post(authJwtController.isAuthenticated, function (req, res) {
@@ -90,6 +120,20 @@ router.post('/signin', function(req, res) {
             }
         };
 });
+
+router.post('/movies', function(req, res) {
+
+    var user = db.findOne(req.body.username);
+
+
+        // check if password matches
+
+    res.json({success: true, token: 'JWT ' + token});
+        
+    
+});
+
+
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
