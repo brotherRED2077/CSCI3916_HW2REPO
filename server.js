@@ -123,14 +123,13 @@ router.post('/signin', function(req, res) {
 
 router.post('/movies', function(req, res) {
 
-    var user = db.findOne(req.body.username);
-
-
-        // check if password matches
-
-    res.json({success: true, token: 'JWT ' + token});
+    res.status(200).send(  {  message:"movie saved"})
         
     
+});
+router.get('/movies', function(req, res) {
+
+    res.status(200).send({  message:"movie GET"})
 });
 
 
